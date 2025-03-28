@@ -12,7 +12,7 @@ if [ ! -f /var/lib/postgresql/data/PG_VERSION ]; then
 
     PGUSER=postgres PGPASSWORD=1q2w3e psql -h primary -c "DO \$\$ BEGIN IF NOT EXISTS (SELECT 1 FROM pg_replication_slots WHERE slot_name = 'replication_slot') THEN PERFORM pg_create_physical_replication_slot('replication_slot'); END IF; END \$\$;"
 
-    rm -rf /var/lib/postgresql/data/* && pg_basebackup --pgdata=/var/lib/postgresql/data -R --slot=replication_slot_2
+    rm -rf /var/lib/postgresql/data/* && pg_basebackup --pgdata=/var/lib/postgresql/data -R --slot=replication_slot
     chown -R postgres:postgres /var/lib/postgresql/data && chmod 0700 /var/lib/postgresql/data
 fi
 
